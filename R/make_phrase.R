@@ -23,6 +23,12 @@ make_phrase <- function(num, num_word, item, verb, adjective, location){
   adjective <- str_replace_na(adjective, "")
   location <- str_replace_na(location, "")
   num_word <- english(num)
+  if (num == 1 ){
+    item <- item
+  }
+  else{
+    item <- pluralize_gift(item)
+  }
   phrase <- paste(num_word, adjective, item, verb, location)
   return (phrase)
 
