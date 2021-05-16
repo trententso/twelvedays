@@ -13,11 +13,30 @@
 #' @import purrr
 #'
 #' @export
-sing_day <- function(dataset, line, phrase_col){
 
-  phrases <- dataset %>% pull({{phrase_col}})
+sing_day <- function(data, num, phrase_col){
+  word <- ordinal(num)
+  intro <- glue("On the {word} day of Christmas, my true love gave to me,")
+  #phrases <- data %>% pluck(phrase_col)
+  phrases <- data %>% pull({{phrase_col}})
+  last <- phrases[1]
+  if (num == 1){
+    lines <- phrases[num:1]
+    return (glue("{intro} {lines}"))
 
-  #????
+  }
+  else {
+    lines <- phrases[num:2]
+    lines <- paste(lines, collapse = ", ")
+    lines <- str_replace(lines, " , ", ", ")
+    return (glue("{intro} {lines}and {last}"))
+
+
+  }
+
+}
+
+
 
 
 }
