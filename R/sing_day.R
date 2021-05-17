@@ -15,28 +15,27 @@
 #' @export
 
 sing_day <- function(data, num, phrase_col){
-  word <- ordinal(num)
-  intro <- glue("On the {word} day of Christmas, my true love gave to me,")
+  word <- english::ordinal(num)
+  intro <- glue::glue("On the {word} day of Christmas, my true love gave to me,")
   #phrases <- data %>% pluck(phrase_col)
   phrases <- data %>% pull({{phrase_col}})
   last <- phrases[1]
   if (num == 1){
     lines <- phrases[num:1]
-    return (glue("{intro} {lines}"))
+    return (glue::glue("{intro} \n {lines}"))
 
   }
   else {
     lines <- phrases[num:2]
-    lines <- paste(lines, collapse = ", ")
+    lines <- paste(lines, collapse = ", \n")
     lines <- str_replace(lines, " , ", ", ")
-    return (glue("{intro} {lines}and {last}"))
+    lines <- str_replace(lines, " ,", ",")
+    return (glue::glue("{intro} \n{lines}and \n{last}"))
 
 
   }
 
 }
-
-
 
 
 
